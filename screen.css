@@ -1,0 +1,90 @@
+/* Ctrl Leo Del logo screen. Link options (see README) set --bg, --size and --drift. */
+:root {
+  --bg: #0c0f10;
+  --size: 60vmin;
+  --drift: 1.5vmin;
+  --glitch-red: #ff2a55;
+  --glitch-cyan: #1ee8ff;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body.idle { cursor: none; }
+
+.stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.letter { fill: #fff; }
+
+/* Copies of the logo that only show up while a glitch is running. */
+.fx {
+  visibility: hidden;
+  pointer-events: none;
+}
+.fx.tint { mix-blend-mode: screen; }
+.fx.red .letter { fill: var(--glitch-red); }
+.fx.cyan .letter { fill: var(--glitch-cyan); }
+
+/* Slow wander to protect OLED screens from burn-in. Off unless ?drift=1. */
+body.drift .drift-x { animation: drift-x 97s ease-in-out infinite alternate; }
+body.drift .drift-y { animation: drift-y 131s ease-in-out infinite alternate; }
+
+@keyframes drift-x {
+  from { transform: translateX(calc(var(--drift) * -1)); }
+  to { transform: translateX(var(--drift)); }
+}
+@keyframes drift-y {
+  from { transform: translateY(calc(var(--drift) * -1)); }
+  to { transform: translateY(var(--drift)); }
+}
+
+/* Help text: visible while the mouse moves, gone when idle so it never ends up on camera. */
+.hint {
+  position: fixed;
+  inset: auto 0 3vh;
+  margin: 0;
+  padding: 0 1rem;
+  text-align: center;
+  font: 500 13px/1.6 system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  color: #7d8889;
+  transition: opacity 0.4s;
+}
+.hint kbd {
+  font: inherit;
+  color: #c9d1d2;
+  padding: 0 0.35em;
+  border: 1px solid #2c3436;
+  border-radius: 4px;
+}
+body.idle .hint { opacity: 0; }
