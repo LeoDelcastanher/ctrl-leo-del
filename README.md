@@ -13,24 +13,48 @@ Plain HTML, CSS and JavaScript. No build step, nothing to install.
 ## Using it
 
 Open the page and click anywhere (or press <kbd>F</kbd>) for fullscreen.
-The cursor and help text hide after a couple of seconds without mouse movement.
+The cursor, help text and menu fade out after a few seconds without mouse movement, so they never end up on camera.
 
 | Key | Does |
 |---|---|
 | <kbd>F</kbd> or click | Fullscreen on/off |
+| <kbd>M</kbd> | Menu on/off |
+| <kbd>1</kbd>–<kbd>9</kbd> | Switch to that preset |
+| <kbd>←</kbd> <kbd>→</kbd> | Previous / next preset |
 | <kbd>G</kbd> | Glitch now |
 | <kbd>L</kbd> | Flicker now |
 | <kbd>P</kbd> | Key press now |
+| <kbd>B</kbd> | Play the switch-on intro now |
 | <kbd>Space</kbd> | A random effect now |
 
 Pressing a key doesn't bring the cursor or help text back, so you can cue an effect on camera.
+
+### Menu and presets
+
+Press <kbd>M</kbd> or the **Menu** button in the bottom-right corner.
+Pick one of the presets, or change the effects, timing, size and background yourself.
+
+| # | Preset | What it does |
+|---|---|---|
+| 1 | Default | All effects, every ~12 s |
+| 2 | Calm | All effects, every ~25 s |
+| 3 | Busy | All effects, every ~5 s |
+| 4 | Flicker only | Just the neon flicker |
+| 5 | Glitch only | Just the glitch |
+| 6 | Key press only | Just the key press |
+| 7 | Still | No effects on their own; cue them with the keys |
+| 8 | Black background | All effects, on pure black |
+| 9 | Long display | Calm, with slow drift for OLED TVs |
+
+Presets don't change the logo size or the intro setting, because those depend on the screen rather than the look.
+Whatever you choose is written into the page's link straight away, so you can bookmark it, or use **Copy link** and open the same setup on another screen.
 
 While the page is open on the hosted site, it keeps the screen from going to sleep.
 Browsers don't allow this when `index.html` is opened straight from the disk.
 
 ## Link options
 
-Add these to the end of the link, for example `?fx=glitch,flicker&every=20&bg=000000`.
+The menu fills these in for you. You can also add them to the end of the link by hand, for example `?fx=glitch,flicker&every=20&bg=000000`.
 
 | Option | Default | What it does |
 |---|---|---|

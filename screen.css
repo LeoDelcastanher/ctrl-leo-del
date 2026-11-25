@@ -87,4 +87,230 @@ body.drift .drift-y { animation: drift-y 131s ease-in-out infinite alternate; }
   border: 1px solid #2c3436;
   border-radius: 4px;
 }
-body.idle .hint { opacity: 0; }
+
+/* ---- Menu ------------------------------------------------------------------ */
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  font: 600 11px/1.6 system-ui, sans-serif;
+  text-align: center;
+  color: #c9d1d2;
+  padding: 0 0.35em;
+  border: 1px solid #2c3436;
+  border-radius: 4px;
+}
+
+.menu-button,
+.menu button,
+.menu .chip {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.menu-button {
+  position: fixed;
+  right: 2vw;
+  bottom: 3vh;
+  padding: 6px 10px 6px 12px;
+  font: 500 13px/1.4 system-ui, sans-serif;
+  color: #c9d1d2;
+  background: rgba(16, 21, 22, 0.9);
+  border: 1px solid #2c3436;
+  border-radius: 8px;
+  transition: opacity 0.4s;
+}
+.menu-button:hover,
+.menu-button[aria-expanded="true"] { background: #1f292b; border-color: #3b4a4d; }
+
+.menu {
+  position: fixed;
+  top: 3vh;
+  right: 2vw;
+  width: min(340px, 96vw);
+  max-height: calc(94vh - 48px); /* stops above the Menu button */
+  overflow: auto;
+  padding: 16px 16px 12px;
+  font: 14px/1.4 system-ui, sans-serif;
+  color: #d5dcdd;
+  background: rgba(14, 18, 19, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid #263032;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.4s;
+  scrollbar-width: thin;
+}
+.menu[hidden] { display: none; }
+
+.menu h2 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7d8889;
+}
+.menu section + section { margin-top: 16px; }
+
+.presets {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.preset {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 6px 10px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.preset kbd { grid-row: span 2; }
+.preset .name { font-weight: 600; }
+.preset .note { font-size: 12px; color: #8a9596; }
+.preset:hover { background: #182022; }
+.preset[aria-pressed="true"] {
+  background: #1f292b;
+  border-color: #3b4a4d;
+}
+.preset[aria-pressed="true"] kbd {
+  color: #0c0f10;
+  background: #e8eced;
+  border-color: #e8eced;
+}
+
+.row {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0;
+}
+.label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #aab4b5;
+}
+.label output { color: #fff; }
+
+input[type="range"] {
+  width: 100%;
+  margin: 0;
+  accent-color: #e8eced;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  position: relative;
+  padding: 4px 12px;
+  font-size: 13px;
+  border: 1px solid #2c3436;
+  border-radius: 999px;
+}
+.chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.chip:has(input:checked) {
+  color: #0c0f10;
+  background: #e8eced;
+  border-color: #e8eced;
+}
+
+.swatches { display: flex; gap: 8px; }
+.swatch {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: var(--swatch);
+  border: 2px solid #3a4446;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.swatch[aria-pressed="true"],
+.swatch.custom.on { border-color: #fff; }
+.swatch.custom {
+  overflow: hidden;
+  background: conic-gradient(#ff5e5e, #ffd25e, #5eff8b, #5ec8ff, #b45eff, #ff5e5e);
+}
+.swatch.custom input {
+  position: absolute;
+  inset: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+.toggle input { margin: 0; accent-color: #e8eced; }
+
+.actions { display: flex; gap: 8px; margin-top: 14px; }
+.actions button {
+  flex: 1;
+  padding: 7px 8px;
+  font-size: 13px;
+  background: #1a2123;
+  border: 1px solid #2c3436;
+  border-radius: 8px;
+}
+.actions button:hover { background: #222b2d; }
+
+.keys {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 2;
+  color: #7d8889;
+}
+
+.menu :focus-visible,
+.chip:has(input:focus-visible),
+.swatch.custom:has(input:focus-visible),
+.menu-button:focus-visible {
+  outline: 2px solid #8fd3ff;
+  outline-offset: 2px;
+}
+
+.toast {
+  position: fixed;
+  top: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 14px;
+  font: 500 13px/1.4 system-ui, sans-serif;
+  color: #e8eced;
+  background: rgba(14, 18, 19, 0.92);
+  border: 1px solid #2c3436;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.toast.show { opacity: 1; }
+
+/* When the mouse goes still, everything but the logo fades out. */
+body.idle .hint,
+body.idle .menu-button,
+body.idle .menu {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .hint { display: none; }
+}

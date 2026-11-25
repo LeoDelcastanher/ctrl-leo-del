@@ -44,7 +44,58 @@
       </div>
     </div>
   </main>
-  <p class="hint">Click or press <kbd>F</kbd> for fullscreen &middot; <kbd>G</kbd> glitch &middot; <kbd>L</kbd> flicker &middot; <kbd>P</kbd> key press &middot; <kbd>Space</kbd> random</p>
+  <p class="hint">Click or press <kbd>F</kbd> for fullscreen &middot; <kbd>M</kbd> menu</p>
+  <button class="menu-button" type="button" aria-controls="menu" aria-expanded="false">Menu <kbd>M</kbd></button>
+
+  <!-- Everything here hides itself when the mouse stops moving, so it never ends up on camera. -->
+  <aside class="menu" id="menu" aria-label="Logo screen settings" hidden>
+    <section>
+      <h2>Presets <span class="preset-state"></span></h2>
+      <ol class="presets"></ol>
+    </section>
+
+    <section>
+      <h2>Adjust</h2>
+      <div class="row">
+        <span class="label">Effects</span>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="fx" value="flicker">Flicker</label>
+          <label class="chip"><input type="checkbox" name="fx" value="glitch">Glitch</label>
+          <label class="chip"><input type="checkbox" name="fx" value="press">Key press</label>
+        </div>
+      </div>
+      <label class="row">
+        <span class="label">Every <output id="every-out"></output></span>
+        <input type="range" id="every" min="3" max="60" step="1">
+      </label>
+      <label class="row">
+        <span class="label">Size <output id="size-out"></output></span>
+        <input type="range" id="size" min="30" max="100" step="5">
+      </label>
+      <div class="row">
+        <span class="label">Background</span>
+        <div class="swatches">
+          <button type="button" class="swatch" data-bg="0c0f10" title="Dark" style="--swatch: #0c0f10"></button>
+          <button type="button" class="swatch" data-bg="000000" title="Black" style="--swatch: #000000"></button>
+          <button type="button" class="swatch" data-bg="293132" title="Tile colour" style="--swatch: #293132"></button>
+          <label class="swatch custom" title="Pick any colour"><input type="color" id="bg" aria-label="Background colour"></label>
+        </div>
+      </div>
+      <label class="toggle"><input type="checkbox" id="drift">Slow drift, for OLED screens</label>
+      <label class="toggle"><input type="checkbox" id="boot">Switch-on intro when the page opens</label>
+    </section>
+
+    <div class="actions">
+      <button type="button" data-action="intro">Play intro <kbd>B</kbd></button>
+      <button type="button" data-action="copy">Copy link</button>
+    </div>
+    <p class="keys">
+      <kbd>1</kbd>–<kbd>9</kbd> preset &middot; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next preset<br>
+      <kbd>G</kbd> glitch &middot; <kbd>L</kbd> flicker &middot; <kbd>P</kbd> key press &middot; <kbd>Space</kbd> random
+    </p>
+  </aside>
+  <div class="toast" role="status" aria-live="polite"></div>
+
   <script src="screen.js"></script>
 </body>
 </html>
