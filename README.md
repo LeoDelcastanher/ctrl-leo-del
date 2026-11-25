@@ -78,3 +78,8 @@ python -m http.server 8000
 ```
 
 Then open <http://localhost:8000/>. Opening `index.html` directly works too, except for keeping the screen awake.
+
+## Updating
+
+When you change `screen.css` or `screen.js`, bump the `?v=` number on their links in `index.html`.
+Browsers keep the old files for a few minutes otherwise, and a screen that already had the page open would mix old and new.
